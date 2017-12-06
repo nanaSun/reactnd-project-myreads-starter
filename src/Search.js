@@ -4,17 +4,28 @@ import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from  'sort-by'
 import {Link} from 'react-router-dom'
-
+import Book from './Book';
 class SearchComponent extends React.Component {
   state={
-    query:""
+    query:"",
+    isSearching:false
   }
   updateQuery=(query)=>{
-    this.setState({query:query.trim()})   
-    if(this.state.query!=='')
-      this.props.queryBooks(this.state.query)
+    if(query!==''){
+       this.setState({
+          query:query.trim(),
+          isSearching:true
+       })
+       this.props.queryBooks(this.state.query,()=>{
+          this.setState({
+            isSearching:false
+          })
+       })
+    }
   }
   render() {
+    const { query,isSearching } = this.state
+    const { onChangeShelf , searchBooks } =this.props
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -24,7 +35,11 @@ class SearchComponent extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+              {isSearching?'searching...':searchBooks.length==0?'no result':searchBooks.map((book) => (
+                <Book book={book}  key={book.id} onChangeShelf={onChangeShelf}/>
+              ))}
+          </ol>
         </div>
       </div>
     )
