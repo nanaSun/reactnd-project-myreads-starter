@@ -1,11 +1,12 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from  'sort-by'
 import {Link} from 'react-router-dom'
 import Book from './Book';
 class SearchComponent extends React.Component {
+  static propTypes={
+    searchBooks:PropTypes.object.isRequired,
+    onChangeShelf:PropTypes.func.isRequired
+  }
   state={
     query:"",
     isSearching:false
@@ -24,7 +25,7 @@ class SearchComponent extends React.Component {
     }
   }
   render() {
-    const { query,isSearching } = this.state
+    const { isSearching } = this.state
     const { onChangeShelf , searchBooks } =this.props
     return (
       <div className="search-books">
@@ -36,7 +37,7 @@ class SearchComponent extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-              {isSearching?'searching...':searchBooks.length==0?'no result':searchBooks.map((book) => (
+              {isSearching?'searching...':searchBooks.length===0?'no result':searchBooks.map((book) => (
                 <Book book={book}  key={book.id} onChangeShelf={onChangeShelf}/>
               ))}
           </ol>

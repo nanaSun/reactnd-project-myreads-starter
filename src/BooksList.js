@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import escapeRegExp from 'escape-string-regexp';
-import sortBy from  'sort-by';
 import {Link} from 'react-router-dom';
 import Book from './Book';
 class BooksList extends React.Component {
