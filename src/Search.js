@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Book from './Book';
 class SearchComponent extends React.Component {
   static propTypes={
-    searchBooks:PropTypes.object.isRequired,
+    searchBooks:PropTypes.array.isRequired,
     onChangeShelf:PropTypes.func.isRequired
   }
   state={
