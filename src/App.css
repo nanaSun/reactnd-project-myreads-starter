@@ -42,11 +42,11 @@ body, .app {
 .bookshelf-books {
   text-align: center;
 }
-
 .open-search {
   position: fixed;
   right: 25px;
   bottom: 25px;
+  z-index: 11;
 }
 .open-search a {
   display: block;
@@ -164,6 +164,8 @@ body, .app {
 /* book cover */
 
 .book-cover {
+  width: 128px;
+  height: 193px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
 }
@@ -171,4 +173,34 @@ body, .app {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+/*notification*/
+.notification{ 
+  position: fixed; 
+  bottom: 0px; 
+  left: 0px; 
+  z-index: 10; 
+  background: #f7f7b1;
+  color: #444;
+  padding: 10px;
+  font-size: 0.8em;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  animation:fadeInOut 3s 0s linear both;
+}
+.hide{ display: none; }
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  90%{
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

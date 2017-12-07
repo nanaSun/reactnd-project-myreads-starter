@@ -10,9 +10,11 @@ class BooksList extends React.Component {
   }
   render() {
     const { books,shelf,onChangeShelf } = this.props
-    const currentlyReading=[]
-    const read=[]
-    const wantToRead=[]
+    const Shelflists=[
+      ['currentlyReading','Currently Reading'],
+      ['wantToRead','Want to Read'],
+      ['read','Read']
+    ]
     return (
     <div className="list-books">
         <div className="list-books-title">
@@ -20,36 +22,18 @@ class BooksList extends React.Component {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                {shelf.currentlyReading.map((bookid) => (
-                  <Book book={books[bookid]}  key={bookid} onChangeShelf={onChangeShelf}/>
-                ))}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {shelf.wantToRead.map((bookid) => (
-                  <Book book={books[bookid]}  key={bookid} onChangeShelf={onChangeShelf}/>
-                ))}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {shelf.read.map((bookid) => (
-                  <Book book={books[bookid]}  key={bookid} onChangeShelf={onChangeShelf}/>
+            {Shelflists.map((list)=>(
+              <div className="bookshelf" key={list[0]}>
+                <h2 className="bookshelf-title">{list[1]}</h2>
+                <div className="bookshelf-books">
+                  <ol className="books-grid">
+                  {shelf[list[0]].map((bookid) => (
+                    <Book book={books[bookid]}  key={bookid} onChangeShelf={onChangeShelf}/>
                   ))}
-                </ol>
+                  </ol>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="open-search">

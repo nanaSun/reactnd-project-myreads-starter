@@ -9,6 +9,7 @@ class BooksApp extends React.Component {
   state={
     books:{},
     searchBooks:[],
+    notification:"",
     shelf:{
       currentlyReading:[],
       read:[],
@@ -36,13 +37,17 @@ class BooksApp extends React.Component {
     }) 
   }
   changeShelf(book,shelf){
+    this.setState({
+        notification:''
+    })
     BooksAPI.update(book,shelf).then((_shelf)=>{
       let tmpbook=this.state.books;
       book['shelf']=shelf
       tmpbook[book.id]=book
       this.setState({
         shelf:_shelf,
-        books:tmpbook
+        books:tmpbook,
+        notification:book.title+" has already moved into "+shelf+" shelf."
       })
     }) 
   }
@@ -79,7 +84,6 @@ class BooksApp extends React.Component {
         }}
         onChangeShelf={(book,shelf)=>{
           this.changeShelf(book,shelf)
-          history.push('/')
         }}
         />
         )}
@@ -94,6 +98,7 @@ class BooksApp extends React.Component {
         />
         )}
       />
+      <div className={this.state.notification?'notification':'hide'}>{this.state.notification}</div>
     </div>
     )
   }
